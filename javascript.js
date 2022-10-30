@@ -1,4 +1,5 @@
 //variables:
+let displayValue = '';
 
 //query selectors:
 const key = document.querySelectorAll('.btn');
@@ -9,9 +10,36 @@ const delKey = document.querySelector('.delete');
 const equalsKey = document.querySelector('.equals');
 const pointKey = document.querySelector('.point');
 
+//event listeners:
+key.forEach((button) =>
+  button.addEventListener('click', (e) => {
+    console.log(e);
+  })
+);
+numKey.forEach((button) =>
+  button.addEventListener('click', () => {
+    console.log('number');
+  })
+);
+opKey.forEach((button) =>
+  button.addEventListener('click', () => {
+    console.log('operator');
+  })
+);
+clearKey.addEventListener('click', () => {
+    console.log('clear');
+});
+delKey.addEventListener('click', () => {
+    console.log('delete');
+});
+equalsKey.addEventListener('click', () => {
+    console.log('=');
+});
+pointKey.addEventListener('click', () => {
+    console.log('.');
+});
 
 //operator functions:
-
 function add(x, y) {
     return x + y;
 };
