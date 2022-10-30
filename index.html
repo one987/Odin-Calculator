@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +9,15 @@
     <link rel="stylesheet" href="styles.css">
     <script src="javascript.js"></script>
 </head>
+
 <body>
 
     <div class="calculator">
-        <div class="display"><p>000000</p></div>
+        <div class="display-box">
+            <p class="display">000000</p>
+        </div>
         <div class="keypad">
-            <div class="top-row">
+            <div class="row">
                 <button class="btn" id="clear">C</button>
                 <button class="btn">()</button>
                 <button class="btn">%</button>
@@ -37,7 +41,7 @@
                 <button class="btn">3</button>
                 <button class="btn op" id="add">+</button>
             </div>
-            <div class="bottom-row">
+            <div class="row">
                 <button class="btn zero">0</button>
                 <button class="btn">.</button>
                 <button class="btn op" id="equals">=</button>
@@ -46,6 +50,7 @@
     </div>
 
     <div class="footer"></div>
-    
+
 </body>
+
 </html>
