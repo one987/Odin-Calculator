@@ -9,25 +9,33 @@ const clearKey = document.querySelector('.clear');
 const delKey = document.querySelector('.delete');
 const equalsKey = document.querySelector('.equals');
 const pointKey = document.querySelector('.point');
+const display = document.getElementById('display');
 
 //event listeners:
 key.forEach((button) =>
-  button.addEventListener('click', (e) => {
-    console.log(e);
-  })
+    button.addEventListener('click', (e) => {
+        console.log(e);
+    })
 );
 numKey.forEach((button) =>
-  button.addEventListener('click', () => {
-    console.log('number');
-  })
+    button.addEventListener('click', ({target}) => {
+        console.log(target.innerText);
+        display.innerHTML = target.innerText;
+        displayValue = target.innerText;
+        console.log(`displayValue = ${displayValue}`);
+    })
 );
 opKey.forEach((button) =>
-  button.addEventListener('click', () => {
-    console.log('operator');
-  })
+    button.addEventListener('click', ({target}) => {
+        console.log(target.innerText);
+    })
 );
 clearKey.addEventListener('click', () => {
     console.log('clear');
+    display.innerHTML = '';
+    displayValue = ''
+    console.log(`displayValue = ${displayValue}`);
+
 });
 delKey.addEventListener('click', () => {
     console.log('delete');
