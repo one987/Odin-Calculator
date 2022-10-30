@@ -1,3 +1,15 @@
+//variables:
+
+//query selectors:
+const key = document.querySelectorAll('.btn');
+const numKey = document.querySelectorAll('.num');
+const opKey = document.querySelectorAll('.op');
+const clearKey = document.querySelector('.clear');
+const delKey = document.querySelector('.delete');
+const equalsKey = document.querySelector('.equals');
+const pointKey = document.querySelector('.point');
+
+
 //operator functions:
 
 function add(x, y) {
