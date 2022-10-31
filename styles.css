@@ -33,6 +33,10 @@ body {
     right: 5px;
 }
 
+.smalldisplay {
+    text-align: right;
+}
+
 .keypad {
     height: 300px;
     width: 300px;
