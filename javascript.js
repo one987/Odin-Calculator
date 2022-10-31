@@ -1,5 +1,13 @@
 //variables:
 let displayValue = '';
+let firstInt = null;
+let secondInt = null;
+let operator = '';
+
+function concat(firstInt, secondInt) {
+    int = '' + firstInt + secondInt;
+    return int;
+}
 
 //query selectors:
 const key = document.querySelectorAll('.btn');
@@ -18,15 +26,24 @@ key.forEach((button) =>
     })
 );
 numKey.forEach((button) =>
-    button.addEventListener('click', ({target}) => {
-        console.log(target.innerText);
-        display.innerHTML = target.innerText;
-        displayValue = target.innerText;
-        console.log(`displayValue = ${displayValue}`);
+    button.addEventListener('click', ({ target }) => {
+
+        if (displayValue == '') {
+            console.log(target.innerText); //log target
+            displayValue = target.innerText; //update display value
+            display.innerHTML = displayValue;//update display html
+            firstInt = displayValue;
+            
+        } else if (displayValue !== '') {
+            displayValue = firstInt + target.innerText;
+            display.innerHTML = displayValue;
+        }
+
+
     })
 );
 opKey.forEach((button) =>
-    button.addEventListener('click', ({target}) => {
+    button.addEventListener('click', ({ target }) => {
         console.log(target.innerText);
     })
 );
@@ -76,3 +93,4 @@ function operate(x, y, operator) {
             return divide(x, y);
     }
 };
+
