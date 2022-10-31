@@ -1,14 +1,9 @@
 //variables:
 let displayValue = '';
-let firstInt = null;
-let secondInt = null;
+let firstInt = '';
+let secondInt = '';
 let operator = '';
 let result = '';
-
-function concat(firstInt, secondInt) {
-    int = '' + firstInt + secondInt;
-    return int;
-}
 
 //query selectors:
 const key = document.querySelectorAll('.btn');
@@ -27,24 +22,27 @@ key.forEach((button) =>
         console.log({target});
     })
 );
-numKey.forEach((button) =>
-    button.addEventListener('click', ({ target }) => {
+//number keys
+numKey.forEach((button) => 
+    button.addEventListener('click', ({target}) => {
 
         if (displayValue == '') {
             console.log(target.innerText); //log target
             displayValue = target.innerText; //update display value
             display.innerHTML = displayValue;//update display html
-            smallDis.innerText = displayValue;//update small display
+            smallDis.innerText += target.innerText;//update small display
         } else if (displayValue !== '') {
             displayValue += target.innerText;//concatenate string
             display.innerHTML = displayValue;//update display
-            smallDis.innerText = displayValue;//update small display
+            smallDis.innerText += target.innerText;//update small display
         }
     })
 
 );
+//operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
+        //add another on click event that changes the function once clicked?
             operator = target.innerText;
             firstInt = displayValue;
             smallDis.innerText += operator;
@@ -52,11 +50,9 @@ opKey.forEach((button) =>
             display.innerHTML = ''
             displayValue = ''
         }
-            
     )
-
 );
-
+// = 
 equalsKey.addEventListener('click', () => {
     secondInt = displayValue;
     result = operate(firstInt, secondInt, operator);
@@ -76,8 +72,6 @@ delKey.addEventListener('click', () => {
     display.innerHTML = displayValue.slice(0, -1);
     smallDis.innerText = displayValue.slice(0, -1);
     displayValue = display.innerHTML;
-
-
 });
 
 pointKey.addEventListener('click', () => {
@@ -120,6 +114,5 @@ function clear() {
     displayValue = '';
     smallDis.innerText = '';
     operator = '';
-    console.log(`displayValue = ${displayValue}`);
 }
 
