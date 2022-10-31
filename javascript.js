@@ -35,7 +35,7 @@ numKey.forEach((button) =>
             firstInt = displayValue;
             
         } else if (displayValue !== '') {
-            displayValue = firstInt + target.innerText;
+            displayValue += target.innerText;
             display.innerHTML = displayValue;
         }
 
