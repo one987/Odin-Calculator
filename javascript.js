@@ -17,11 +17,14 @@ const display = document.getElementById('display');
 const smallDis = document.getElementById('small');
 
 //event listeners:
+
+//all keys
 key.forEach((button) =>
     button.addEventListener('click', ({target}) => {
         console.log({target});
     })
 );
+
 //number keys
 numKey.forEach((button) => 
     button.addEventListener('click', ({target}) => {
@@ -37,8 +40,8 @@ numKey.forEach((button) =>
             smallDis.innerText += target.innerText;//update small display
         }
     })
-
 );
+
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
@@ -52,7 +55,8 @@ opKey.forEach((button) =>
         }
     )
 );
-// = 
+
+// equals key
 equalsKey.addEventListener('click', () => {
     secondInt = displayValue;
     result = operate(firstInt, secondInt, operator);
@@ -60,7 +64,6 @@ equalsKey.addEventListener('click', () => {
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     displayValue = result;
     console.log (`${firstInt} ${operator} ${secondInt} = ${result}`)
-
 });
 
 clearKey.addEventListener('click', () => {
@@ -114,5 +117,22 @@ function clear() {
     displayValue = '';
     smallDis.innerText = '';
     operator = '';
-}
+};
 
+//to do:
+//string together several operations and get the right answer, 
+//with each pair of numbers being evaluated at a time.
+
+//add decimal points
+
+//add +/- support?
+
+//divide by zero snarky message/easter egg
+
+//fix last quirky bugs and clean up code
+
+//style with css
+
+//clean up CSS and HTML
+
+//?profit?
