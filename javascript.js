@@ -23,8 +23,8 @@ const smallDis = document.getElementById('small');
 
 //event listeners:
 key.forEach((button) =>
-    button.addEventListener('click', (e) => {
-        console.log(e);
+    button.addEventListener('click', ({target}) => {
+        console.log({target});
     })
 );
 numKey.forEach((button) =>
@@ -34,42 +34,41 @@ numKey.forEach((button) =>
             console.log(target.innerText); //log target
             displayValue = target.innerText; //update display value
             display.innerHTML = displayValue;//update display html
-            smallDis.innerText = displayValue;
+            smallDis.innerText = displayValue;//update small display
         } else if (displayValue !== '') {
-            displayValue += target.innerText;
-            display.innerHTML = displayValue;
-            smallDis.innerText = displayValue;
+            displayValue += target.innerText;//concatenate string
+            display.innerHTML = displayValue;//update display
+            smallDis.innerText = displayValue;//update small display
         }
     })
 
 );
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-        console.log(target.innerText);
-        operator = target.innerText;
-        firstInt = displayValue;
-        smallDis.innerText += operator;
-        console.log(firstInt);
-        display.innerHTML = ''
-        displayValue = ''
-        // clear();
-        
-    })
+            operator = target.innerText;
+            firstInt = displayValue;
+            smallDis.innerText += operator;
+            console.log(firstInt);
+            display.innerHTML = ''
+            displayValue = ''
+        }
+            
+    )
 
 );
 
 equalsKey.addEventListener('click', () => {
-    console.log('=');
     secondInt = displayValue;
     result = operate(firstInt, secondInt, operator);
     display.innerHTML = result;
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     displayValue = result;
-    
+    console.log (`${firstInt} ${operator} ${secondInt} = ${result}`)
+
 });
 
 clearKey.addEventListener('click', () => {
-   clear();
+    clear();
 });
 
 delKey.addEventListener('click', () => {
@@ -77,7 +76,7 @@ delKey.addEventListener('click', () => {
     display.innerHTML = displayValue.slice(0, -1);
     smallDis.innerText = displayValue.slice(0, -1);
     displayValue = display.innerHTML;
-    
+
 
 });
 
@@ -120,6 +119,7 @@ function clear() {
     display.innerHTML = '';
     displayValue = '';
     smallDis.innerText = '';
+    operator = '';
     console.log(`displayValue = ${displayValue}`);
 }
 
