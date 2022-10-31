@@ -53,7 +53,7 @@ opKey.forEach((button) =>
         display.innerHTML = ''
         displayValue = ''
         // clear();
-        //add smaller font equation display
+        
     })
 
 );
@@ -75,6 +75,8 @@ clearKey.addEventListener('click', () => {
 delKey.addEventListener('click', () => {
     console.log('delete');
     display.innerHTML = displayValue.slice(0, -1);
+    smallDis.innerText = displayValue.slice(0, -1);
+    displayValue = display.innerHTML;
     
 
 });
