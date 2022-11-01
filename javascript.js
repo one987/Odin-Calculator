@@ -30,12 +30,10 @@ numKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
 
         if (display.innerHTML == '') {
-            //displayValue = target.innerText; //update display value
-            display.innerHTML = target.innerText;//update display html
+            display.innerHTML = target.innerText;//update display 
             smallDis.innerText += target.innerText;//update small display
         } else if (display.innerHTML !== '') {
             display.innerHTML += target.innerText;//concatenate string
-            //display.innerHTML = displayValue;//update display
             smallDis.innerText += target.innerText;//update small display
         }
     })
@@ -44,30 +42,23 @@ numKey.forEach((button) =>
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-
-        operator = target.innerText;
-        firstInt = display.innerHTML;
-        smallDis.innerText += operator;
-        console.log(firstInt);
-        display.innerHTML = ''
-    }
-
-    )
-);
+            operator = target.innerText;
+            firstInt = display.innerHTML;
+            smallDis.innerText += operator;
+            console.log(firstInt);
+            display.innerHTML = ''
+        } 
+    ));
 
 // equals key
 equalsKey.addEventListener('click', () => {
-    if (firstInt == '') {
-        clear();
+    if (display.innerHTML == '' || firstInt == '') {
+        return
     } else {
-        secondInt = display.innerHTML;
-        result = operate(firstInt, secondInt, operator);
-        display.innerHTML = result;
-        smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
-        console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
-        checkInfinity();
+        equals();
     }
-});
+}
+);
 
 clearKey.addEventListener('click', () => {
     clear();
@@ -118,16 +109,27 @@ function operate(x, y, operator) {
     }
 };
 
+function equals() {
+    secondInt = display.innerHTML;
+    result = operate(firstInt, secondInt, operator);
+    display.innerHTML = result;
+    smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
+    console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
+    divideByZero();
+   
+}
+
 function clear() {
     console.log('clear');
     display.innerHTML = '';
     displayValue = '';
     smallDis.innerText = '';
     operator = '';
+
 };
 
-function checkInfinity() {
-    if (display.innerHTML == 'Infinity') {
+function divideByZero() {
+    if (display.innerHTML == 'Infinity' || display.innerHTML == 'NaN') {
         alert('infinite parralel universes'); //make this a dark theme switch
     }
 }
