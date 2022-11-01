@@ -3,6 +3,8 @@ let firstInt = '';
 let secondInt = '';
 let operator = '';
 let result = '';
+let isOpPressed = false;
+let isEqualPressed = false;
 
 //query selectors:
 const key = document.querySelectorAll('.btn');
@@ -28,7 +30,13 @@ key.forEach((button) =>
 numKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
 
-        if (display.innerText == '') {
+        if (isEqualPressed == true) {
+            clear();
+            display.innerText = target.innerText; 
+            smallDis.innerText += target.innerText;
+        }
+
+        else if (display.innerText == '') {
             display.innerText = target.innerText;//update display 
             smallDis.innerText += target.innerText;//update small display
         } else if (display.innerText !== '') {
@@ -41,12 +49,12 @@ numKey.forEach((button) =>
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-            operator = target.innerText;
-            firstInt = display.innerText;
-            smallDis.innerText += operator;
-            console.log(firstInt);
-            display.innerText = ''
-        } 
+        operator = target.innerText;
+        firstInt = display.innerText;
+        smallDis.innerText += operator;
+        console.log(firstInt);
+        display.innerText = ''
+    }
     ));
 
 // equals key
@@ -64,11 +72,16 @@ clearKey.addEventListener('click', () => {
 });
 
 delKey.addEventListener('click', () => {
+
+    if (isEqualPressed = true) {
+        clear();
+    } 
     console.log('delete');
     let str = display.innerText;
-    let str2 =smallDis.innerText;
+    let str2 = smallDis.innerText;
     display.innerText = str.slice(0, -1);
     smallDis.innerText = str2.slice(0, -1);
+
 });
 
 pointKey.addEventListener('click', ({ target }) => {
@@ -115,8 +128,9 @@ function equals() {
     display.innerText = result;
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
+    isEqualPressed = true;
     divideByZero();
-   
+
 }
 
 function clear() {
@@ -124,6 +138,7 @@ function clear() {
     display.innerText = '';
     smallDis.innerText = '';
     operator = '';
+    isEqualPressed = false;
 
 };
 
