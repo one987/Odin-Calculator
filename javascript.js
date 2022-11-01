@@ -1,5 +1,4 @@
 //variables:
-let displayValue = '';
 let firstInt = '';
 let secondInt = '';
 let operator = '';
@@ -29,11 +28,11 @@ key.forEach((button) =>
 numKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
 
-        if (display.innerHTML == '') {
-            display.innerHTML = target.innerText;//update display 
+        if (display.innerText == '') {
+            display.innerText = target.innerText;//update display 
             smallDis.innerText += target.innerText;//update small display
-        } else if (display.innerHTML !== '') {
-            display.innerHTML += target.innerText;//concatenate string
+        } else if (display.innerText !== '') {
+            display.innerText += target.innerText;//concatenate string
             smallDis.innerText += target.innerText;//update small display
         }
     })
@@ -43,16 +42,16 @@ numKey.forEach((button) =>
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
             operator = target.innerText;
-            firstInt = display.innerHTML;
+            firstInt = display.innerText;
             smallDis.innerText += operator;
             console.log(firstInt);
-            display.innerHTML = ''
+            display.innerText = ''
         } 
     ));
 
 // equals key
 equalsKey.addEventListener('click', () => {
-    if (display.innerHTML == '' || firstInt == '') {
+    if (display.innerText == '' || firstInt == '') {
         return
     } else {
         equals();
@@ -66,15 +65,16 @@ clearKey.addEventListener('click', () => {
 
 delKey.addEventListener('click', () => {
     console.log('delete');
-    displayValue = display.innerHTML;
-    display.innerHTML = displayValue.slice(0, -1);
-    smallDis.innerText = displayValue.slice(0, -1);
+    let str = display.innerText;
+    let str2 =smallDis.innerText;
+    display.innerText = str.slice(0, -1);
+    smallDis.innerText = str2.slice(0, -1);
 });
 
 pointKey.addEventListener('click', ({ target }) => {
-    if (display.innerHTML.includes('.') !== true) {
+    if (display.innerText.includes('.') !== true) {
         console.log('.');
-        display.innerHTML += target.innerText;
+        display.innerText += target.innerText;
         smallDis.innerText += target.innerText;
     }
 });
@@ -110,9 +110,9 @@ function operate(x, y, operator) {
 };
 
 function equals() {
-    secondInt = display.innerHTML;
+    secondInt = display.innerText;
     result = operate(firstInt, secondInt, operator);
-    display.innerHTML = result;
+    display.innerText = result;
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
     divideByZero();
@@ -121,15 +121,14 @@ function equals() {
 
 function clear() {
     console.log('clear');
-    display.innerHTML = '';
-    displayValue = '';
+    display.innerText = '';
     smallDis.innerText = '';
     operator = '';
 
 };
 
 function divideByZero() {
-    if (display.innerHTML == 'Infinity' || display.innerHTML == 'NaN') {
+    if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
         alert('infinite parralel universes'); //make this a dark theme switch
     }
 }
