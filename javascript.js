@@ -32,7 +32,7 @@ numKey.forEach((button) =>
 
         if (isEqualPressed == true) {
             clear();
-            display.innerText = target.innerText; 
+            display.innerText = target.innerText;
             smallDis.innerText += target.innerText;
         }
 
@@ -49,11 +49,20 @@ numKey.forEach((button) =>
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-        operator = target.innerText;
-        firstInt = display.innerText;
-        smallDis.innerText += operator;
-        console.log(firstInt);
-        display.innerText = ''
+        isEqualPressed = false;
+        isOpPressed = true;
+        
+        if (display.innerText == '')
+            return
+            
+         else {
+
+            operator = target.innerText;
+            firstInt = display.innerText;
+            smallDis.innerText += operator;
+            display.innerText = ''
+            checkShit();
+        }
     }
     ));
 
@@ -73,14 +82,15 @@ clearKey.addEventListener('click', () => {
 
 delKey.addEventListener('click', () => {
 
-    if (isEqualPressed = true) {
+    if (isEqualPressed == true) {
         clear();
-    } 
+    } else {
     console.log('delete');
     let str = display.innerText;
     let str2 = smallDis.innerText;
     display.innerText = str.slice(0, -1);
     smallDis.innerText = str2.slice(0, -1);
+}
 
 });
 
@@ -138,13 +148,22 @@ function clear() {
     display.innerText = '';
     smallDis.innerText = '';
     operator = '';
+    isOpPressed = false;
     isEqualPressed = false;
+    
 
 };
 
 function divideByZero() {
     if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
         alert('infinite parralel universes'); //make this a dark theme switch
+    }
+}
+
+function checkShit() {
+    let str = smallDis.innerText;
+    if (str.includes('+') || str.includes('-') || str.includes('*') || str.includes('/') ) {
+        console.log(firstInt, operator);
     }
 }
 
