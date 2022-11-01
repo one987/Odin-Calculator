@@ -29,14 +29,13 @@ key.forEach((button) =>
 numKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
 
-        if (displayValue == '') {
-            console.log(target.innerText); //log target
-            displayValue = target.innerText; //update display value
-            display.innerHTML = displayValue;//update display html
+        if (display.innerHTML == '') {
+            //displayValue = target.innerText; //update display value
+            display.innerHTML = target.innerText;//update display html
             smallDis.innerText += target.innerText;//update small display
-        } else if (displayValue !== '') {
-            displayValue += target.innerText;//concatenate string
-            display.innerHTML = displayValue;//update display
+        } else if (display.innerHTML !== '') {
+            display.innerHTML += target.innerText;//concatenate string
+            //display.innerHTML = displayValue;//update display
             smallDis.innerText += target.innerText;//update small display
         }
     })
@@ -45,28 +44,29 @@ numKey.forEach((button) =>
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
+
         operator = target.innerText;
-        firstInt = displayValue;
+        firstInt = display.innerHTML;
         smallDis.innerText += operator;
         console.log(firstInt);
         display.innerHTML = ''
-        displayValue = ''
     }
-
-
 
     )
 );
 
 // equals key
 equalsKey.addEventListener('click', () => {
-    secondInt = displayValue;
-    result = operate(firstInt, secondInt, operator);
-    display.innerHTML = result;
-    smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
-    displayValue = result;
-    console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
-    checkInfinity();
+    if (firstInt == '') {
+        clear();
+    } else {
+        secondInt = display.innerHTML;
+        result = operate(firstInt, secondInt, operator);
+        display.innerHTML = result;
+        smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
+        console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
+        checkInfinity();
+    }
 });
 
 clearKey.addEventListener('click', () => {
@@ -75,16 +75,15 @@ clearKey.addEventListener('click', () => {
 
 delKey.addEventListener('click', () => {
     console.log('delete');
+    displayValue = display.innerHTML;
     display.innerHTML = displayValue.slice(0, -1);
     smallDis.innerText = displayValue.slice(0, -1);
-    displayValue = display.innerHTML;
 });
 
 pointKey.addEventListener('click', ({ target }) => {
-    if (displayValue.includes('.') !== true) {
+    if (display.innerHTML.includes('.') !== true) {
         console.log('.');
-        displayValue += target.innerText;
-        display.innerHTML = displayValue;
+        display.innerHTML += target.innerText;
         smallDis.innerText += target.innerText;
     }
 });
@@ -128,7 +127,7 @@ function clear() {
 };
 
 function checkInfinity() {
-    if (displayValue == 'Infinity') {
+    if (display.innerHTML == 'Infinity') {
         alert('infinite parralel universes'); //make this a dark theme switch
     }
 }
@@ -139,7 +138,7 @@ function checkInfinity() {
 
 //add +/- support?
 
-//fix last quirky bugs and clean up code
+//add keyboard support
 
 //style with css
 
