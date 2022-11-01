@@ -45,7 +45,6 @@ numKey.forEach((button) =>
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-        //add another on click event that changes the function once clicked?
         operator = target.innerText;
         firstInt = displayValue;
         smallDis.innerText += operator;
@@ -53,6 +52,9 @@ opKey.forEach((button) =>
         display.innerHTML = ''
         displayValue = ''
     }
+
+
+
     )
 );
 
@@ -64,6 +66,7 @@ equalsKey.addEventListener('click', () => {
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     displayValue = result;
     console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
+    checkInfinity();
 });
 
 clearKey.addEventListener('click', () => {
@@ -124,13 +127,17 @@ function clear() {
     operator = '';
 };
 
+function checkInfinity() {
+    if (displayValue == 'Infinity') {
+        alert('infinite parralel universes'); //make this a dark theme switch
+    }
+}
+
 //to do:
 //string together several operations and get the right answer, 
 //with each pair of numbers being evaluated at a time.
 
 //add +/- support?
-
-//divide by zero snarky message/easter egg
 
 //fix last quirky bugs and clean up code
 
