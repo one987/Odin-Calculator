@@ -20,14 +20,14 @@ const smallDis = document.getElementById('small');
 
 //all keys
 key.forEach((button) =>
-    button.addEventListener('click', ({target}) => {
-        console.log({target});
+    button.addEventListener('click', ({ target }) => {
+        console.log({ target });
     })
 );
 
 //number keys
-numKey.forEach((button) => 
-    button.addEventListener('click', ({target}) => {
+numKey.forEach((button) =>
+    button.addEventListener('click', ({ target }) => {
 
         if (displayValue == '') {
             console.log(target.innerText); //log target
@@ -46,13 +46,13 @@ numKey.forEach((button) =>
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
         //add another on click event that changes the function once clicked?
-            operator = target.innerText;
-            firstInt = displayValue;
-            smallDis.innerText += operator;
-            console.log(firstInt);
-            display.innerHTML = ''
-            displayValue = ''
-        }
+        operator = target.innerText;
+        firstInt = displayValue;
+        smallDis.innerText += operator;
+        console.log(firstInt);
+        display.innerHTML = ''
+        displayValue = ''
+    }
     )
 );
 
@@ -63,7 +63,7 @@ equalsKey.addEventListener('click', () => {
     display.innerHTML = result;
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     displayValue = result;
-    console.log (`${firstInt} ${operator} ${secondInt} = ${result}`)
+    console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
 });
 
 clearKey.addEventListener('click', () => {
@@ -77,8 +77,13 @@ delKey.addEventListener('click', () => {
     displayValue = display.innerHTML;
 });
 
-pointKey.addEventListener('click', () => {
-    console.log('.');
+pointKey.addEventListener('click', ({ target }) => {
+    if (displayValue.includes('.') !== true) {
+        console.log('.');
+        displayValue += target.innerText;
+        display.innerHTML = displayValue;
+        smallDis.innerText += target.innerText;
+    }
 });
 
 //operator functions:
@@ -122,8 +127,6 @@ function clear() {
 //to do:
 //string together several operations and get the right answer, 
 //with each pair of numbers being evaluated at a time.
-
-//add decimal points
 
 //add +/- support?
 
