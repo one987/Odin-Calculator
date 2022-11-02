@@ -184,8 +184,6 @@ function operate(x, y, operator) {
 
 //to do:
 
-//add +/- support?
-
 //add keyboard support
 
 //style with css
