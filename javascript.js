@@ -37,6 +37,7 @@ numKey.forEach((button) =>
             smallDis.innerText += target.innerText;
         } else if (isOpPressed) {
             clearDis();
+            isOpPressed = false;
             display.innerText = target.innerText;
             smallDis.innerText += target.innerText;
         }
@@ -62,6 +63,7 @@ opKey.forEach((button) =>
             smallDis.innerText += operator;
             operator = target.innerText;
             isOpPressed = true;
+            divideByZero();
         } else if (sigh) {
             operator = target.innerText;
             firstInt = display.innerText;
@@ -78,9 +80,7 @@ opKey.forEach((button) =>
         }
     })
 
-
-
-);
+    );
 
 // equals key
 equalsKey.addEventListener('click', () => {
@@ -144,7 +144,8 @@ function clear() {
 
 function divideByZero() {
     if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
-        alert('infinite parralel universes'); //make this a dark theme switch
+        alert('Beyond the Infinite!');
+        clear();
     }
 }
 
