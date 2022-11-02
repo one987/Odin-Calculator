@@ -5,6 +5,8 @@ let operator = '';
 let result = '';
 let isOpPressed = false;
 let isEqualPressed = false;
+let sigh = false;
+
 
 //query selectors:
 const key = document.querySelectorAll('.btn');
@@ -34,6 +36,11 @@ numKey.forEach((button) =>
             clear();
             display.innerText = target.innerText;
             smallDis.innerText += target.innerText;
+        } else if (isOpPressed) {
+            clearDis();
+            display.innerText = target.innerText;
+            smallDis.innerText += target.innerText;
+
         }
 
         else if (display.innerText == '') {
@@ -50,21 +57,34 @@ numKey.forEach((button) =>
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
         isEqualPressed = false;
-        isOpPressed = true;
-        
-        if (display.innerText == '')
-            return
-            
-         else {
+        if (display.innerText == '') {
+            return 
+        } else if (firstInt && operator && sigh == false) {
+            firstInt = operate(firstInt, display.innerText, operator);
+            display.innerText = firstInt;
+            smallDis.innerText += operator;
+            operator = target.innerText;
+            isOpPressed = true; 
 
+        } else if (sigh) {
             operator = target.innerText;
             firstInt = display.innerText;
+            console.log(firstInt, operator);
             smallDis.innerText += operator;
             display.innerText = ''
-            checkShit();
+            sigh = false;
+        } else {
+            operator = target.innerText;
+            firstInt = display.innerText;
+            console.log(firstInt, operator);
+            smallDis.innerText += operator;
+            display.innerText = ''
         }
-    }
-    ));
+    } )
+
+       
+    
+    );
 
 // equals key
 equalsKey.addEventListener('click', () => {
@@ -85,12 +105,12 @@ delKey.addEventListener('click', () => {
     if (isEqualPressed == true) {
         clear();
     } else {
-    console.log('delete');
-    let str = display.innerText;
-    let str2 = smallDis.innerText;
-    display.innerText = str.slice(0, -1);
-    smallDis.innerText = str2.slice(0, -1);
-}
+        console.log('delete');
+        let str = display.innerText;
+        let str2 = smallDis.innerText;
+        display.innerText = str.slice(0, -1);
+        smallDis.innerText = str2.slice(0, -1);
+    }
 
 });
 
@@ -139,18 +159,23 @@ function equals() {
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
     console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
     isEqualPressed = true;
+    isOpPressed = false;
+    sigh = true;
     divideByZero();
 
 }
 
 function clear() {
-    console.log('clear');
     display.innerText = '';
     smallDis.innerText = '';
+    firstInt = '';
+    secondInt = '';
     operator = '';
     isOpPressed = false;
     isEqualPressed = false;
-    
+    sigh = false;
+    console.log('clear');
+
 
 };
 
@@ -162,14 +187,17 @@ function divideByZero() {
 
 function checkShit() {
     let str = smallDis.innerText;
-    if (str.includes('+') || str.includes('-') || str.includes('*') || str.includes('/') ) {
-        console.log(firstInt, operator);
+    if (str.includes('=')) {
+        return true;
     }
 }
 
+function clearDis() {
+    display.innerText = '';
+    console.log('clear dis');
+}
+
 //to do:
-//string together several operations and get the right answer, 
-//with each pair of numbers being evaluated at a time.
 
 //add +/- support?
 
