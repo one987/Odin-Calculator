@@ -33,20 +33,16 @@ numKey.forEach((button) =>
 
         if (isEqualPressed) {
             clear();
-            display.innerText = target.innerText;
-            smallDis.innerText += target.innerText;
+            updateDisplay(target);
         } else if (isOpPressed) {
             clearDis();
             isOpPressed = false;
-            display.innerText = target.innerText;
-            smallDis.innerText += target.innerText;
+            updateDisplay(target);
         }
         else if (display.innerText == '') {
-            display.innerText = target.innerText;//update display 
-            smallDis.innerText += target.innerText;//update small display
+            updateDisplay(target);
         } else if (display.innerText !== '') {
-            display.innerText += target.innerText;//concatenate string
-            smallDis.innerText += target.innerText;//update small display
+            updateDisplay(target);
         }
     })
 );
@@ -80,7 +76,7 @@ opKey.forEach((button) =>
         }
     })
 
-    );
+);
 
 // equals key
 equalsKey.addEventListener('click', () => {
@@ -110,8 +106,7 @@ delKey.addEventListener('click', () => {
 pointKey.addEventListener('click', ({ target }) => {
     if (display.innerText.includes('.') !== true) {
         console.log('.');
-        display.innerText += target.innerText;
-        smallDis.innerText += target.innerText;
+        updateDisplay(target);
     }
 });
 
@@ -127,7 +122,7 @@ function equals() {
     sigh = true;
     divideByZero();
 
-}
+};
 
 function clear() {
     display.innerText = '';
@@ -147,12 +142,17 @@ function divideByZero() {
         alert('Beyond the Infinite!');
         clear();
     }
+};
+
+function updateDisplay(target) {
+    display.innerText += target.innerText;
+    smallDis.innerText += target.innerText;
 }
 
 function clearDis() {
     display.innerText = '';
     console.log('clear dis');
-}
+};
 
 //operator functions:
 function add(x, y) {
