@@ -7,7 +7,6 @@ let isOpPressed = false;
 let isEqualPressed = false;
 let sigh = false;
 
-
 //query selectors:
 const key = document.querySelectorAll('.btn');
 const numKey = document.querySelectorAll('.num');
@@ -32,7 +31,7 @@ key.forEach((button) =>
 numKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
 
-        if (isEqualPressed == true) {
+        if (isEqualPressed) {
             clear();
             display.innerText = target.innerText;
             smallDis.innerText += target.innerText;
@@ -40,9 +39,7 @@ numKey.forEach((button) =>
             clearDis();
             display.innerText = target.innerText;
             smallDis.innerText += target.innerText;
-
         }
-
         else if (display.innerText == '') {
             display.innerText = target.innerText;//update display 
             smallDis.innerText += target.innerText;//update small display
@@ -58,14 +55,13 @@ opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
         isEqualPressed = false;
         if (display.innerText == '') {
-            return 
+            return
         } else if (firstInt && operator && sigh == false) {
             firstInt = operate(firstInt, display.innerText, operator);
             display.innerText = firstInt;
             smallDis.innerText += operator;
             operator = target.innerText;
-            isOpPressed = true; 
-
+            isOpPressed = true;
         } else if (sigh) {
             operator = target.innerText;
             firstInt = display.innerText;
@@ -80,11 +76,11 @@ opKey.forEach((button) =>
             smallDis.innerText += operator;
             display.innerText = ''
         }
-    } )
+    })
 
-       
-    
-    );
+
+
+);
 
 // equals key
 equalsKey.addEventListener('click', () => {
@@ -93,16 +89,14 @@ equalsKey.addEventListener('click', () => {
     } else {
         equals();
     }
-}
-);
+});
 
 clearKey.addEventListener('click', () => {
     clear();
 });
 
 delKey.addEventListener('click', () => {
-
-    if (isEqualPressed == true) {
+    if (isEqualPressed) {
         clear();
     } else {
         console.log('delete');
@@ -111,7 +105,6 @@ delKey.addEventListener('click', () => {
         display.innerText = str.slice(0, -1);
         smallDis.innerText = str2.slice(0, -1);
     }
-
 });
 
 pointKey.addEventListener('click', ({ target }) => {
@@ -121,6 +114,44 @@ pointKey.addEventListener('click', ({ target }) => {
         smallDis.innerText += target.innerText;
     }
 });
+
+//functions:
+function equals() {
+    secondInt = display.innerText;
+    result = operate(firstInt, secondInt, operator);
+    display.innerText = result;
+    smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
+    console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
+    isEqualPressed = true;
+    isOpPressed = false;
+    sigh = true;
+    divideByZero();
+
+}
+
+function clear() {
+    display.innerText = '';
+    smallDis.innerText = '';
+    firstInt = '';
+    secondInt = '';
+    operator = '';
+    isOpPressed = false;
+    isEqualPressed = false;
+    sigh = false;
+    console.log('clear');
+
+};
+
+function divideByZero() {
+    if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
+        alert('infinite parralel universes'); //make this a dark theme switch
+    }
+}
+
+function clearDis() {
+    display.innerText = '';
+    console.log('clear dis');
+}
 
 //operator functions:
 function add(x, y) {
@@ -152,50 +183,6 @@ function operate(x, y, operator) {
     }
 };
 
-function equals() {
-    secondInt = display.innerText;
-    result = operate(firstInt, secondInt, operator);
-    display.innerText = result;
-    smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`;
-    console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
-    isEqualPressed = true;
-    isOpPressed = false;
-    sigh = true;
-    divideByZero();
-
-}
-
-function clear() {
-    display.innerText = '';
-    smallDis.innerText = '';
-    firstInt = '';
-    secondInt = '';
-    operator = '';
-    isOpPressed = false;
-    isEqualPressed = false;
-    sigh = false;
-    console.log('clear');
-
-
-};
-
-function divideByZero() {
-    if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
-        alert('infinite parralel universes'); //make this a dark theme switch
-    }
-}
-
-function checkShit() {
-    let str = smallDis.innerText;
-    if (str.includes('=')) {
-        return true;
-    }
-}
-
-function clearDis() {
-    display.innerText = '';
-    console.log('clear dis');
-}
 
 //to do:
 
