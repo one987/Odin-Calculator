@@ -5,7 +5,7 @@ let operator = '';
 let result = '';
 let isOpPressed = false;
 let isEqualPressed = false;
-let sigh = false;
+let bruh = false;
 
 //query selectors:
 const key = document.querySelectorAll('.btn');
@@ -38,12 +38,9 @@ numKey.forEach((button) =>
             clearDis();
             isOpPressed = false;
             updateDisplay(target);
-        }
-        else if (display.innerText == '') {
+        } else if (display.innerText == '' || display.innerText !== '') {
             updateDisplay(target);
-        } else if (display.innerText !== '') {
-            updateDisplay(target);
-        }
+        } 
     })
 );
 
@@ -53,20 +50,20 @@ opKey.forEach((button) =>
         isEqualPressed = false;
         if (display.innerText == '') {
             return
-        } else if (firstInt && operator && sigh == false) {
+        } else if (firstInt && operator && bruh == false) {
             firstInt = operate(firstInt, display.innerText, operator);
             display.innerText = firstInt;
             smallDis.innerText += operator;
             operator = target.innerText;
             isOpPressed = true;
             divideByZero();
-        } else if (sigh) {
+        } else if (bruh) {
             operator = target.innerText;
             firstInt = display.innerText;
             console.log(firstInt, operator);
             smallDis.innerText += operator;
             display.innerText = ''
-            sigh = false;
+            bruh = false;
         } else {
             operator = target.innerText;
             firstInt = display.innerText;
@@ -119,7 +116,7 @@ function equals() {
     console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
     isEqualPressed = true;
     isOpPressed = false;
-    sigh = true;
+    bruh = true;
     divideByZero();
 
 };
@@ -132,7 +129,7 @@ function clear() {
     operator = '';
     isOpPressed = false;
     isEqualPressed = false;
-    sigh = false;
+    bruh = false;
     console.log('clear');
 
 };
