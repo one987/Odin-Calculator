@@ -3,6 +3,7 @@
 } */
 
 body {
+    font-family: Roboto, sans-serif;
     background-color: ghostwhite;
     height: 100vh;
     display: flex;
@@ -13,20 +14,20 @@ body {
 .calculator {
     background-color: #212529;
     padding: 5px;
-    height: 400px;
-    width: 300px;
+    height: 460px;
+    width: 360px;
     border: 1px solid black;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .display-box {
     color: Ghostwhite;
     position: relative;
-    height: 100px;
-    width: 300px;
+    height: 160px;
+    width: 360px;
 }
 
 .display {
@@ -38,11 +39,13 @@ body {
 
 .smalldisplay {
     text-align: right;
+    position: absolute;
+    right: 5px;
 }
 
 .keypad {
-    height: 300px;
-    width: 300px;
+    height: 360px;
+    width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,17 +62,24 @@ body {
 }
 
 .btn {
+    background-color: #39B5E6;
+    border: none;
+    color: ghostwhite;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
     margin: 0;
-    height: 55px;
-    width: 70px;
+    height: 67px;
+    width: 85px;
 }
 
 .zero,
 .clear {
-    width: 145px;
+    width: 175px;
 }
 
 .op,
 .equals {
     background-color: #e83e8c;
+    
 }
