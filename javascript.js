@@ -156,8 +156,8 @@ function clearDis() {
     console.log('clear dis')
 }
 
-function roundResult(number) {
-    return Math.round(number * 1000) / 1000
+function roundResult(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100
   }
 
 //operator functions:
