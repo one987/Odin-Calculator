@@ -18,6 +18,7 @@ const pointKey = document.querySelector('.point')
 const display = document.getElementById('display')
 const smallDis = document.getElementById('small')
 
+
 //event listeners:
 
 //all keys
@@ -26,6 +27,10 @@ key.forEach((button) =>
         console.log({ target })
     })
 )
+//Keylogger:
+const keyPress = document.addEventListener('keydown', (e) => {
+    console.log(e)
+})
 
 //number keys
 numKey.forEach((button) =>
@@ -51,7 +56,7 @@ opKey.forEach((button) =>
         if (display.innerText == '') {
             return
         } else if (firstInt && operator && bruh == false) {
-            firstInt = operate(firstInt, display.innerText, operator)
+            firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
             smallDis.innerText += operator
             operator = target.innerText
@@ -110,7 +115,7 @@ pointKey.addEventListener('click', ({ target }) => {
 //functions:
 function equals() {
     secondInt = display.innerText
-    result = operate(firstInt, secondInt, operator)
+    result = roundResult(operate(firstInt, secondInt, operator))
     display.innerText = result
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`
     console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
@@ -150,6 +155,10 @@ function clearDis() {
     display.innerText = ''
     console.log('clear dis')
 }
+
+function roundResult(number) {
+    return Math.round(number * 1000) / 1000
+  }
 
 //operator functions:
 function add(x, y) {
