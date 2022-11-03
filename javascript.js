@@ -8,7 +8,6 @@ let isEqualPressed = false
 let bruh = false
 
 //query selectors:
-const key = document.querySelectorAll('.btn')
 const numKey = document.querySelectorAll('.num')
 const opKey = document.querySelectorAll('.op')
 const clearKey = document.querySelector('.clear')
@@ -18,19 +17,8 @@ const pointKey = document.querySelector('.point')
 const display = document.getElementById('display')
 const smallDis = document.getElementById('small')
 
-
-//event listeners:
-
-//all keys
-key.forEach((button) =>
-    button.addEventListener('click', ({ target }) => {
-        console.log({ target })
-    })
-)
 //Keylogger:
-const keyPress = document.addEventListener('keydown', (e) => {
-    console.log(e)
-})
+window.addEventListener('keydown', keyboardInput)
 
 //number keys
 numKey.forEach((button) =>
@@ -45,9 +33,9 @@ numKey.forEach((button) =>
             updateDisplay(target)
         } else if (display.innerText == '' || display.innerText !== '') {
             updateDisplay(target)
-        } 
+        }
     })
-);
+)
 
 //operator keys
 opKey.forEach((button) =>
@@ -65,19 +53,16 @@ opKey.forEach((button) =>
         } else if (bruh) {
             operator = target.innerText
             firstInt = display.innerText
-            console.log(firstInt, operator)
             smallDis.innerText += operator
-            display.innerText = ''
+            clearDis()
             bruh = false
         } else {
             operator = target.innerText
             firstInt = display.innerText
-            console.log(firstInt, operator)
             smallDis.innerText += operator
-            display.innerText = ''
+            clearDis()
         }
     })
-
 )
 
 // equals key
@@ -94,20 +79,11 @@ clearKey.addEventListener('click', () => {
 })
 
 delKey.addEventListener('click', () => {
-    if (isEqualPressed) {
-        clear()
-    } else {
-        console.log('delete')
-        let str = display.innerText
-        let str2 = smallDis.innerText
-        display.innerText = str.slice(0, -1)
-        smallDis.innerText = str2.slice(0, -1)
-    }
+    backSpace()
 })
 
 pointKey.addEventListener('click', ({ target }) => {
     if (display.innerText.includes('.') !== true) {
-        console.log('.')
         updateDisplay(target)
     }
 })
@@ -118,12 +94,10 @@ function equals() {
     result = roundResult(operate(firstInt, secondInt, operator))
     display.innerText = result
     smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`
-    console.log(`${firstInt} ${operator} ${secondInt} = ${result}`)
     isEqualPressed = true
     isOpPressed = false
     bruh = true
     divideByZero()
-
 }
 
 function clear() {
@@ -135,8 +109,17 @@ function clear() {
     isOpPressed = false
     isEqualPressed = false
     bruh = false
-    console.log('clear')
+}
 
+function backSpace() {
+    if (isEqualPressed) {
+        clear()
+    } else {
+        let str = display.innerText
+        let str2 = smallDis.innerText
+        display.innerText = str.slice(0, -1)
+        smallDis.innerText = str2.slice(0, -1)
+    }
 }
 
 function divideByZero() {
@@ -151,14 +134,76 @@ function updateDisplay(target) {
     smallDis.innerText += target.innerText
 }
 
+function updateDisplayKey(e) {
+    display.innerText += e.key
+    smallDis.innerText += e.key
+}
+
 function clearDis() {
     display.innerText = ''
-    console.log('clear dis')
 }
 
 function roundResult(num) {
     return Math.round((num + Number.EPSILON) * 100) / 100
-  }
+}
+
+//keyboard functionality:
+function keyboardInput(e) {
+    if (e.key >= 0 && e.key <= 9) {
+        if (isEqualPressed) {
+            clear()
+            updateDisplayKey(e)
+        } else if (isOpPressed) {
+            clearDis()
+            isOpPressed = false
+            updateDisplayKey(e)
+        } else if (display.innerText == '' || display.innerText !== '') {
+            updateDisplayKey(e)
+        }
+    } if (e.key === '=') {
+        if (display.innerText == '' || firstInt == '') {
+            return
+        } else {
+            equals()
+        }
+    } if (e.key === '.') {
+        if (display.innerText.includes('.') !== true) {
+            updateDisplayKey(e)
+        }
+    } if (e.key === 'Backspace') { backSpace()
+    } if (e.key === 'Escape') { clear()
+    } if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+        isEqualPressed = false
+        if (display.innerText == '') {
+            return
+        } else if (firstInt && operator && bruh == false) {
+            firstInt = roundResult(operate(firstInt, display.innerText, operator))
+            display.innerText = firstInt
+            smallDis.innerText += operator
+            operator = convertOp(e.key)
+            isOpPressed = true
+            divideByZero()
+        } else if (bruh) {
+            operator = convertOp(e.key)
+            firstInt = display.innerText
+            smallDis.innerText += operator
+            clearDis()
+            bruh = false
+        } else {
+            operator = convertOp(e.key)
+            firstInt = display.innerText
+            smallDis.innerText += operator
+            clearDis()
+        }
+    }
+}
+
+function convertOp(keyOp) {
+    if (keyOp === '/') return '÷'
+    if (keyOp === '*') return '×'
+    if (keyOp === '+') return '+'
+    if (keyOp === '-') return '-'
+}
 
 //operator functions:
 function add(x, y) {
@@ -179,21 +224,18 @@ function divide(x, y) {
 
 function operate(x, y, operator) {
     switch (operator) {
-        case "+":
+        case '+':
             return add(x, y)
-        case "-":
+        case '-':
             return subtract(x, y)
-        case "*":
+        case 'x':
             return multiply(x, y)
-        case "/":
+        case '÷':
             return divide(x, y)
     }
 }
 
-
 //to do:
-
-//add keyboard support
 
 //style with css
 
