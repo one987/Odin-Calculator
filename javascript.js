@@ -181,20 +181,20 @@ function keyboardInput(e) {
         } else if (firstInt && operator && bruh == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
-            smallDis.innerText += operator
+            smallDis.innerText += convertOp(e.key)
             operator = convertOp(e.key)
             isOpPressed = true
             divideByZero()
         } else if (bruh) {
             operator = convertOp(e.key)
             firstInt = display.innerText
-            smallDis.innerText += operator
+            smallDis.innerText += convertOp(e.key)
             clearDis()
             bruh = false
         } else {
             operator = convertOp(e.key)
             firstInt = display.innerText
-            smallDis.innerText += operator
+            smallDis.innerText += convertOp(e.key)
             clearDis()
         }
     }
@@ -244,3 +244,4 @@ function operate(x, y, operator) {
 //clean up CSS and HTML
 
 //?profit?
+
