@@ -46,20 +46,20 @@ opKey.forEach((button) =>
         } else if (firstInt && operator && bruh == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
-            smallDis.innerText += operator
+            smallDis.innerText += target.innerText
             operator = target.innerText
             isOpPressed = true
             divideByZero()
         } else if (bruh) {
             operator = target.innerText
             firstInt = display.innerText
-            smallDis.innerText += operator
+            smallDis.innerText += target.innerText
             clearDis()
             bruh = false
         } else {
             operator = target.innerText
             firstInt = display.innerText
-            smallDis.innerText += operator
+            smallDis.innerText += target.innerText
             clearDis()
         }
     })
@@ -170,8 +170,10 @@ function keyboardInput(e) {
         if (display.innerText.includes('.') !== true) {
             updateDisplayKey(e)
         }
-    } if (e.key === 'Backspace') { backSpace()
-    } if (e.key === 'Escape') { clear()
+    } if (e.key === 'Backspace') {
+        backSpace()
+    } if (e.key === 'Escape') {
+        clear()
     } if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
         isEqualPressed = false
         if (display.innerText == '') {
