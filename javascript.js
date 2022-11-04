@@ -128,6 +128,7 @@ function backSpace() {
         smallDis.innerText = str2.slice(0, -1)
     }
 }
+
 //Easter Egg:
 function divideByZero() {
     if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
@@ -171,11 +172,7 @@ function keyboardInput(e) {
             updateDisplayKey(e)
         }
     } if (e.key === '=') {
-        if (display.innerText == '' || firstInt == '') {
-            return
-        } else {
-            equals()
-        }
+        equals()
     } if (e.key === '.') {
         if (display.innerText.includes('.') !== true) {
             updateDisplayKey(e)
@@ -186,7 +183,7 @@ function keyboardInput(e) {
         clear()
     } if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
         isEqualPressed = false
-        if (display.innerText == '') {
+        if (isOpPressed) {
             return
         } else if (firstInt && operator && allowNewOperation == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
