@@ -32,17 +32,18 @@ numKey.forEach((button) =>
             clearDis()
             isOpPressed = false
             updateDisplay(target)
-        } else if (display.innerText == '' || display.innerText !== '') {
+        } else 
+        //if (display.innerText == '' || display.innerText !== '') {
             updateDisplay(target)
         }
-    })
+    )
 )
 
 //operator keys
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
         isEqualPressed = false
-        if (display.innerText == '') {
+        if (display.innerText == '' || isOpPressed) {
             return
         } else if (firstInt && operator && bruh == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
@@ -55,12 +56,14 @@ opKey.forEach((button) =>
             operator = target.innerText
             firstInt = display.innerText
             smallDis.innerText += target.innerText
+            isOpPressed = true
             clearDis()
             bruh = false
         } else {
             operator = target.innerText
             firstInt = display.innerText
             smallDis.innerText += target.innerText
+            isOpPressed = true
             clearDis()
         }
     })
