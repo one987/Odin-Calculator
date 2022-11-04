@@ -68,17 +68,11 @@ opKey.forEach((button) =>
     })
 )
 
-equalsKey.addEventListener('click', () => {
-    equals()
-})
+equalsKey.addEventListener('click', equals)
 
-clearKey.addEventListener('click', () => {
-    clear()
-})
+clearKey.addEventListener('click', clear)
 
-delKey.addEventListener('click', () => {
-    backSpace()
-})
+delKey.addEventListener('click', backSpace)
 
 pointKey.addEventListener('click', ({ target }) => {
     if (display.innerText.includes('.') !== true) {
@@ -119,7 +113,8 @@ function backSpace() {
     if (isEqualPressed) {
         clear()
     } else if (isOpPressed) {
-        isOpPressed = false;
+        isOpPressed = false
+        isEqualPressed = true
         operator = ''
         display.innerText = firstInt
         smallDis.innerText = str2.slice(0, -1)
@@ -137,9 +132,9 @@ function divideByZero() {
             keys.classList.add('divide-by-zero')
         }
         for (const keys of opKey) {
-            keys.classList.add('divide-by-zero2')
+            keys.classList.add('divide-by-zero-op')
         }
-        equalsKey.classList.add('divide-by-zero2')
+        equalsKey.classList.add('divide-by-zero-op')
         clear()
     }
 }
