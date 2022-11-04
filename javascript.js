@@ -5,7 +5,7 @@ let operator = ''
 let result = ''
 let isOpPressed = false
 let isEqualPressed = false
-let bruh = false
+let allowNewOperation = false
 
 //query selectors:
 const allKeys = document.querySelectorAll('.btn')
@@ -21,7 +21,7 @@ const smallDis = document.getElementById('small')
 //Keylogger:
 window.addEventListener('keydown', keyboardInput)
 
-//number keys
+//number key function
 numKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
 
@@ -32,33 +32,32 @@ numKey.forEach((button) =>
             clearDis()
             isOpPressed = false
             updateDisplay(target)
-        } else 
-        //if (display.innerText == '' || display.innerText !== '') {
+        } else
             updateDisplay(target)
-        }
+    }
     )
 )
 
-//operator keys
+//operator key function
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
         isEqualPressed = false
-        if (display.innerText == '' || isOpPressed) {
+        if (isOpPressed) {
             return
-        } else if (firstInt && operator && bruh == false) {
+        } else if (firstInt && operator && allowNewOperation == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
             smallDis.innerText += target.innerText
             operator = target.innerText
             isOpPressed = true
             divideByZero()
-        } else if (bruh) {
+        } else if (allowNewOperation) {
             operator = target.innerText
             firstInt = display.innerText
             smallDis.innerText += target.innerText
             isOpPressed = true
             clearDis()
-            bruh = false
+            allowNewOperation = false
         } else {
             operator = target.innerText
             firstInt = display.innerText
@@ -69,13 +68,8 @@ opKey.forEach((button) =>
     })
 )
 
-// equals key
 equalsKey.addEventListener('click', () => {
-    if (display.innerText == '' || firstInt == '') {
-        return
-    } else {
-        equals()
-    }
+    equals()
 })
 
 clearKey.addEventListener('click', () => {
@@ -94,14 +88,18 @@ pointKey.addEventListener('click', ({ target }) => {
 
 //functions:
 function equals() {
-    secondInt = display.innerText
-    result = roundResult(operate(firstInt, secondInt, operator))
-    display.innerText = result
-    smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`
-    isEqualPressed = true
-    isOpPressed = false
-    bruh = true
-    divideByZero()
+    if (isEqualPressed || display.innerText == '' || firstInt == '') {
+        return
+    } else {
+        secondInt = display.innerText
+        result = roundResult(operate(firstInt, secondInt, operator))
+        display.innerText = result
+        smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`
+        isEqualPressed = true
+        isOpPressed = false
+        allowNewOperation = true //allows you to choose a new operator and use result as firstInt
+        divideByZero()
+    }
 }
 
 function clear() {
@@ -112,15 +110,20 @@ function clear() {
     operator = ''
     isOpPressed = false
     isEqualPressed = false
-    bruh = false
+    allowNewOperation = false
 }
 
 function backSpace() {
+    let str = display.innerText
+    let str2 = smallDis.innerText
     if (isEqualPressed) {
         clear()
+    } else if (isOpPressed) {
+        isOpPressed = false;
+        operator = ''
+        display.innerText = firstInt
+        smallDis.innerText = str2.slice(0, -1)
     } else {
-        let str = display.innerText
-        let str2 = smallDis.innerText
         display.innerText = str.slice(0, -1)
         smallDis.innerText = str2.slice(0, -1)
     }
@@ -136,7 +139,6 @@ function divideByZero() {
             keys.classList.add('divide-by-zero2')
         }
         equalsKey.classList.add('divide-by-zero2')
-        
         clear()
     }
 }
@@ -153,10 +155,6 @@ function updateDisplayKey(e) {
 
 function clearDis() {
     display.innerText = ''
-}
-
-function roundResult(num) {
-    return Math.round((num + Number.EPSILON) * 100) / 100
 }
 
 //keyboard functionality:
@@ -190,20 +188,20 @@ function keyboardInput(e) {
         isEqualPressed = false
         if (display.innerText == '') {
             return
-        } else if (firstInt && operator && bruh == false) {
+        } else if (firstInt && operator && allowNewOperation == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
             smallDis.innerText += convertOp(e.key)
             operator = convertOp(e.key)
             isOpPressed = true
             divideByZero()
-        } else if (bruh) {
+        } else if (allowNewOperation) {
             operator = convertOp(e.key)
             firstInt = display.innerText
             smallDis.innerText += convertOp(e.key)
             isOpPressed = true
             clearDis()
-            bruh = false
+            allowNewOperation = false
         } else {
             operator = convertOp(e.key)
             firstInt = display.innerText
@@ -251,11 +249,6 @@ function operate(x, y, operator) {
     }
 }
 
-//to do:
-
-//style with css
-
-//clean up CSS and HTML
-
-//?profit?
-
+function roundResult(num) {
+    return Math.round((num + Number.EPSILON) * 100) / 100
+}
