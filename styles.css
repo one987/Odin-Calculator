@@ -13,11 +13,11 @@ body {
 
 .calculator {
     background-color: #212529;
-    padding: 7px;
+    padding: 6px;
     height: 480px;
     width: 360px;
-    border: 2px solid black;
-    border-radius: 5px;
+    border: 2px solid #212529;
+    border-radius: 7px 17px;
     display: flex;
     flex-direction: column;
 
@@ -31,17 +31,18 @@ body {
 }
 
 .display {
-    font-size: 20px;
+    font-size: 24px;
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
     right: 5px;
 }
 
 .smalldisplay {
+    font-size: 18px;
     text-align: right;
     position: absolute;
     right: 5px;
-    top: 10px;
+    top: 7px;
     
 }
 
@@ -61,17 +62,17 @@ body {
 .calculator,
 .keypad,
 .row {
-    gap: 5px;
+    gap: 6px;
 }
 
 .btn {
     background-color: #39B5E6;
-    border-radius: 5px;
+    border-radius: 7px 17px;
     border-style: none;
     color: ghostwhite;
     text-align: center;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     margin: 0;
     height: 67px;
     width: 85px;
@@ -85,20 +86,22 @@ body {
     color: ghostwhite;
 }
 
-.op:hover {
+.op:hover,
+.equals:hover {
     border: 2px solid #e83e8c;
     background-color: #212529;
     color: ghostwhite;
 }
 
 .btn:active {
-    border: 4px solid #39B5E6;
+    border: 3.5px solid #39B5E6;
     background-color: #212529;
     color: ghostwhite;
 }
 
-.op:active {
-    border: 4px solid #e83e8c;
+.op:active,
+.equals:active {
+    border: 3.5px solid #e83e8c;
     background-color: #212529;
     color: ghostwhite;
 }
@@ -110,5 +113,34 @@ body {
 .op,
 .equals {
     background-color: #e83e8c;
-    
+
+}
+/* Easter Egg */
+.divide-by-zero {
+    background-color: ghostwhite;
+    color: #212529;
+}
+
+.divide-by-zero:hover {
+    background-color: #212529;
+    color: ghostwhite;
+    border: 2px solid ghostwhite
+}
+
+.divide-by-zero:active {
+    border: 3.5px solid ghostwhite;
+    background-color: #212529;
+    color: ghostwhite;
+}
+
+.divide-by-zero2:hover {
+    background-color: #212529;
+    color: ghostwhite;
+    border: 2px solid ghostwhite; 
+}
+
+.divide-by-zero2:active {
+    border: 3.5px solid ghostwhite;
+    background-color: #212529;
+    color: ghostwhite;
 }

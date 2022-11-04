@@ -8,6 +8,7 @@ let isEqualPressed = false
 let bruh = false
 
 //query selectors:
+const allKeys = document.querySelectorAll('.btn')
 const numKey = document.querySelectorAll('.num')
 const opKey = document.querySelectorAll('.op')
 const clearKey = document.querySelector('.clear')
@@ -121,10 +122,18 @@ function backSpace() {
         smallDis.innerText = str2.slice(0, -1)
     }
 }
-
+//Easter Egg:
 function divideByZero() {
     if (display.innerText == 'Infinity' || display.innerText == 'NaN') {
-        alert('Beyond the Infinite!')
+        alert('Oops!')
+        for (const keys of allKeys) {
+            keys.classList.add('divide-by-zero')
+        }
+        for (const keys of opKey) {
+            keys.classList.add('divide-by-zero2')
+        }
+        equalsKey.classList.add('divide-by-zero2')
+        
         clear()
     }
 }
