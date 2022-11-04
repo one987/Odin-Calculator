@@ -169,7 +169,7 @@ function keyboardInput(e) {
             clearDis()
             isOpPressed = false
             updateDisplayKey(e)
-        } else if (display.innerText == '' || display.innerText !== '') {
+        } else {
             updateDisplayKey(e)
         }
     } if (e.key === '=') {
@@ -201,12 +201,14 @@ function keyboardInput(e) {
             operator = convertOp(e.key)
             firstInt = display.innerText
             smallDis.innerText += convertOp(e.key)
+            isOpPressed = true
             clearDis()
             bruh = false
         } else {
             operator = convertOp(e.key)
             firstInt = display.innerText
             smallDis.innerText += convertOp(e.key)
+            isOpPressed = true
             clearDis()
         }
     }
