@@ -111,7 +111,7 @@ function backSpace() {
     let str = display.innerText
     let str2 = smallDis.innerText
     if (isEqualPressed) {
-        clear()
+        return
     } else if (isOpPressed) {
         isOpPressed = false
         isEqualPressed = true
