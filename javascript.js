@@ -5,7 +5,6 @@ let operator = ''
 let result = ''
 let isOpPressed = false
 let isEqualPressed = false
-let allowNewOperation = false
 
 //query selectors:
 const allKeys = document.querySelectorAll('.btn')
@@ -41,28 +40,29 @@ numKey.forEach((button) =>
 //operator key function
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-        isEqualPressed = false
         if (isOpPressed) {
             return
-        } else if (firstInt && operator && allowNewOperation == false) {
+        } else if (firstInt && operator && isEqualPressed == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
             smallDis.innerText += target.innerText
             operator = target.innerText
             isOpPressed = true
+            isEqualPressed = false
             divideByZero()
-        } else if (allowNewOperation) {
+        } else if (isEqualPressed) {
             operator = target.innerText
             firstInt = display.innerText
             smallDis.innerText += target.innerText
             isOpPressed = true
+            isEqualPressed = false
             clearDis()
-            allowNewOperation = false
         } else {
             operator = target.innerText
             firstInt = display.innerText
             smallDis.innerText += target.innerText
             isOpPressed = true
+            isEqualPressed = false
             clearDis()
         }
     })
@@ -91,7 +91,6 @@ function equals() {
         smallDis.innerText = `${firstInt} ${operator} ${secondInt} = ${result}`
         isEqualPressed = true
         isOpPressed = false
-        allowNewOperation = true //allows you to choose a new operator and use result as firstInt
         divideByZero()
     }
 }
@@ -104,7 +103,6 @@ function clear() {
     operator = ''
     isOpPressed = false
     isEqualPressed = false
-    allowNewOperation = false
 }
 
 function backSpace() {
@@ -177,28 +175,28 @@ function keyboardInput(e) {
     } if (e.key === 'Escape') {
         clear()
     } if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
-        isEqualPressed = false
         if (isOpPressed) {
             return
-        } else if (firstInt && operator && allowNewOperation == false) {
+        } else if (firstInt && operator && isEqualPressed == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
             display.innerText = firstInt
             smallDis.innerText += convertOp(e.key)
             operator = convertOp(e.key)
             isOpPressed = true
             divideByZero()
-        } else if (allowNewOperation) {
+        } else if (isEqualPressed) {
             operator = convertOp(e.key)
             firstInt = display.innerText
             smallDis.innerText += convertOp(e.key)
             isOpPressed = true
+            isEqualPressed = false
             clearDis()
-            allowNewOperation = false
         } else {
             operator = convertOp(e.key)
             firstInt = display.innerText
             smallDis.innerText += convertOp(e.key)
             isOpPressed = true
+            isEqualPressed = false
             clearDis()
         }
     }
