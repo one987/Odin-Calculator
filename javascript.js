@@ -40,7 +40,7 @@ numKey.forEach((button) =>
 //operator key function
 opKey.forEach((button) =>
     button.addEventListener('click', ({ target }) => {
-        if (isOpPressed) {
+        if (isOpPressed || display.innerText == '') {
             return
         } else if (firstInt && operator && isEqualPressed == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
@@ -50,13 +50,6 @@ opKey.forEach((button) =>
             isOpPressed = true
             isEqualPressed = false
             divideByZero()
-        } else if (isEqualPressed) {
-            operator = target.innerText
-            firstInt = display.innerText
-            smallDis.innerText += target.innerText
-            isOpPressed = true
-            isEqualPressed = false
-            clearDis()
         } else {
             operator = target.innerText
             firstInt = display.innerText
@@ -175,7 +168,7 @@ function keyboardInput(e) {
     } if (e.key === 'Escape') {
         clear()
     } if (e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
-        if (isOpPressed) {
+        if (isOpPressed || display.innerText == '') {
             return
         } else if (firstInt && operator && isEqualPressed == false) {
             firstInt = roundResult(operate(firstInt, display.innerText, operator))
@@ -184,13 +177,6 @@ function keyboardInput(e) {
             operator = convertOp(e.key)
             isOpPressed = true
             divideByZero()
-        } else if (isEqualPressed) {
-            operator = convertOp(e.key)
-            firstInt = display.innerText
-            smallDis.innerText += convertOp(e.key)
-            isOpPressed = true
-            isEqualPressed = false
-            clearDis()
         } else {
             operator = convertOp(e.key)
             firstInt = display.innerText
